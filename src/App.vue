@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <editor></editor>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import editor from './components/editor.vue'
-
 export default {
   name: 'app',
   components: {
-    editor
+
   }
 }
 </script>
@@ -22,7 +20,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   height: 700px;
+}
+
+.icon {
+    width: 4em; height: 5em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
 }
 </style>

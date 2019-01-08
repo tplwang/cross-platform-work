@@ -1,46 +1,107 @@
 <template>
-    <Menu active-name="1-2" :open-names="['1']">
-        <Submenu name="1">
-            <template slot="title">
-                <Icon type="ios-analytics" />
-                Navigation One
-            </template>
-            <MenuGroup title="Item 1">
-                <MenuItem name="1-1">Option 1</MenuItem>
-                <MenuItem name="1-2">Option 2</MenuItem>
-            </MenuGroup>
-            <MenuGroup title="Item 2">
-                <MenuItem name="1-3">Option 3</MenuItem>
-                <MenuItem name="1-4">Option 4</MenuItem>
-            </MenuGroup>
-        </Submenu>
-        <Submenu name="2">
-            <template slot="title">
-                <Icon type="ios-filing" />
-                Navigation Two
-            </template>
-            <MenuItem name="2-1">Option 5</MenuItem>
-            <MenuItem name="2-2">Option 6</MenuItem>
-            <Submenu name="3">
-                <template slot="title">Submenu</template>
-                <MenuItem name="3-1">Option 7</MenuItem>
-                <MenuItem name="3-2">Option 8</MenuItem>
-            </Submenu>
-        </Submenu>
-        <Submenu name="4">
-            <template slot="title">
-                <Icon type="ios-cog" />
-                Navigation Three
-            </template>
-            <MenuItem name="4-1">Option 9</MenuItem>
-            <MenuItem name="4-2">Option 10</MenuItem>
-            <MenuItem name="4-3">Option 11</MenuItem>
-            <MenuItem name="4-4">Option 12</MenuItem>
-        </Submenu>
-    </Menu>
+    <div class="side-bar-content">
+       <div class="add-note-icon" @click="addNote">
+           <Icon type="md-add" size='35' color="#398dee"/>
+           <span>新增文档</span>
+       </div>
+        <div class="note-lsit-content">
+            <div class="note-list" v-for="(note, index) in notes" :key="index"
+                @mouseover="showDeleteBtn(index)"
+                @mouseleave="unShowDeleteBtn(index)"
+                @click="showEditor(index)">
+                <img src="../../public/note-blue.png">
+                <p class="note-title">{{ note.title }}</p>
+                <span v-show="!note.showBtn">·  {{ note.time }}</span>
+                <Button v-show="note.showBtn" type="error" class="delete">删除</Button>
+            </div>
+        </div>
+    </div>
 </template>
+
 <script>
-    export default {
-        
+export default {
+  name: 'sideBar',
+  data() {
+    return {
+      notes: this.$store.state.notes
     }
+  },
+  methods: {
+      addNote: function() {
+          alert('success')
+      },
+      showDeleteBtn: function(index) {
+          this.notes[index].showBtn = true;
+      },
+      unShowDeleteBtn: function(index) {
+          this.notes[index].showBtn = false;
+      },
+      showEditor: function(index) {
+          this.$router.push('/home/editor' + index)
+      }
+  }
+}
 </script>
+
+<style scoped>
+.side-bar-content {
+    height: 100%;
+    width: 100%px;
+    background-color: white;
+}
+
+.add-note-icon {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid rgb(97, 95, 95);
+    cursor: pointer;
+}
+
+.add-note-icon span {
+    font-size: 16px;
+    position: relative;
+    top: 2px;
+}
+
+.note-list {
+    height: 60px;
+    background-color: white;
+    border-bottom: 1px solid rgb(97, 95, 95);
+    text-align: left;
+    cursor: pointer;
+}
+
+.note-list img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.note-title {
+    font-size: 14px;
+    margin-top: -30px;
+    margin-left: 60px;
+    width: 150px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.note-list span {
+    font-size: 8px;
+    float: right;
+    margin-right: 10px;
+    position: relative;
+    top: -18px;
+    width: 85px;
+}
+
+.delete {
+    float: right;
+    position: relative;
+    right: 30px;
+    top: -25px;
+}
+</style>
