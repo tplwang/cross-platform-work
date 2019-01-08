@@ -288,7 +288,7 @@
     @import "../../public/css/atom-one-dark.min.css";
     .mdContainer {
         width: 100%;
-        height: 100%;
+        height: 95%;
         background: lightblue;
         &.fullPage {
             position: fixed;

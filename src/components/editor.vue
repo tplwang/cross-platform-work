@@ -13,6 +13,9 @@
         <div class="side-bar">
             <sideBar></sideBar>
         </div>
+        <div class="editor-title">
+            <input v-model="title" />
+        </div>
         <div class="editorContainer">
             <markdown 
             :mdValuesP="msg.mdValue"  
@@ -39,7 +42,8 @@ export default {
             dilogStatus:false,
             msg: {
                 mdValue:'## Vue-markdownEditor'
-            }
+            },
+            title: '我要显示的内容'
         }
     },
     components: {
@@ -84,9 +88,35 @@ export default {
 
 .editorContainer {
     float: left;
-    width: 79%;
+    width: 79.8%;
     height: 100%;
     margin-left: 2px;
     border: 1px solid #ddd;
+}
+
+.editor-title {
+    height: 50px;
+    width: 80%;
+    float: right;
+    position: relative;
+    left: 3px;
+    background-color: #ffffff;
+    text-align: left;
+    font-size: 20px;
+    padding-left: 50px;
+    padding-top: 10px;
+}
+
+.editor-title input {
+    border: none;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.editor-title input:focus {
+    border: none;
+    outline: none;
 }
 </style>

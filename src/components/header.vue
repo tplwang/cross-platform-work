@@ -44,7 +44,7 @@ export default {
 .head-icon {
   float: right;
   position: relative;
-  right: 100px;
+  right: 10%;
 }
 
 .name-content {
@@ -52,7 +52,7 @@ export default {
   font: 18px arial,sans-serif;
   color: white;
   position: relative;
-  right: 100px;
+  right: 3%;
   line-height: 60px;
 }
 
@@ -61,7 +61,7 @@ export default {
   width: 100px;
   height: 60px;
   position: relative;
-  right: 70px;
+  right: 3%;
 }
 
 .quit-btn {
