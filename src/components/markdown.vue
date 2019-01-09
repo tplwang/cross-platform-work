@@ -16,12 +16,12 @@
                     <li class="markListItem" @click="addQuote" title="quote"><i class="fa fa-quote-left" aria-hidden="true"></i></li>
                     <li class="markListItem" @click="addCode"><i class="fa fa-code" aria-hidden="true"></i></li>
                     <li class="markListItem" @click="addLink"><i class="fa fa-link" aria-hidden="true"></i></li>
-                    <li class="markListItem" @click="addImage"><i class="fa fa-picture-o" aria-hidden="true"></i></li>
+                    <li class="markListItem" @click="addImage"><i class="fa fa-pictureo" aria-hidden="true"></i></li>
                     <li class="markListItem" @click="addTable" title="table"><i class="fa fa-table" aria-hidden="true"></i></li>
-                    <li class="markListItem" @click="addUl" title="ul-list"><i class="fa fa-list-ul" aria-hidden="true"></i></li>
+                    <li class="markListItem" @click="addUl" title="ul-list"><i class="fa fa-listul" aria-hidden="true"></i></li>
                     <li class="markListItem" @click="addOl" title="ol-list"><i class="fa fa-list-ol" aria-hidden="true"></i></li>
-                    <li class="markListItem" @click="fullPageFn" title="fullpage"><i class="fa fa-arrows-alt" aria-hidden="true"></i></li>
-                    <li class="markListItem" @click="previewFn" title="preview"><i class="fa fa-eye-slash" aria-hidden="true"></i></li>
+                    <li class="markListItem" @click="fullPageFn" title="fullpage"><i class="fa fa-arrowsalt" aria-hidden="true"></i></li>
+                    <li class="markListItem" @click="previewFn" title="preview"><i class="fa fa-eyeslash-fill" aria-hidden="true"></i></li>
                     <li class="markListItem" @click="previewAllFn" title="previewAll"><i class="fa fa-eye" aria-hidden="true"></i></li>
                 </ul>
     
@@ -103,7 +103,7 @@
                 }
             },
             addImage: function() {
-                insertContent("![Vue](https://cn.vuejs.org/images/logo.png)", this);
+                insertContent("![在此添加图片描述](https://cn.vuejs.org/images/logo.png)", this);
             },
             addHTitle: function(index) {
                 let tmp = '';
@@ -187,7 +187,7 @@
                 insertContent('\n----\n', this);
             },
             addLink: function() {
-                insertContent("[Vue](https://cn.vuejs.org/images/logo.png)", this);
+                insertContent("[在此添加描述](https://baidu.com)", this);
             },
             addQuote: function() {
                 let textareaDom = document.querySelector('.mdEditor');
@@ -286,6 +286,8 @@
     /*引入atom的代码高亮样式文件*/
     
     @import "../../public/css/atom-one-dark.min.css";
+
+    @import "../../public/css/font_1007516_4k02nzbii1p.css";
     .mdContainer {
         width: 100%;
         height: 95%;
@@ -341,7 +343,7 @@
         }
         .mdBodyContainer {
             width: 100%;
-            height: calc(100% - 36px);
+            height: calc(100% - 1px);
             background: #fff;
             display: flex;
             justify-content: space-between;

@@ -70,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 .indexContainer {
     width: 100%;
-    height: 100%;
+    height: 95%;
     background: #ddd;
     position: relative;
 }
