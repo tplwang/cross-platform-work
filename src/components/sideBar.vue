@@ -61,10 +61,16 @@ export default {
             this.seletedNote = index
         },
         deleteNote: function(index) {
-            if (index === this.seletedNote) {
-                this.seletedNote = 0
+            if (this.$store.state.notes.length > 1) {
+                if (index === this.seletedNote) {
+                    this.seletedNote = 0
+                    this.$router.push({
+                        path: `/home/editor/${0}`
+                    })
+                }
+            } else {
                 this.$router.push({
-                    path: `/home/editor/${0}`
+                    path: `/home/`
                 })
             }
             this.$store.state.notes.splice(index, 1)
