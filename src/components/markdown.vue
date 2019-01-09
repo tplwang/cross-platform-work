@@ -29,9 +29,9 @@
         </div>
         <div class="mdBodyContainer" :class="{ noMenu: !navStatus }">
             <div class="editContainer" v-if="editStatus">
-                <textarea name="" class="mdEditor" @keydown.9="tabFn" v-scroll="editScroll" v-model="input"></textarea>
+                <textarea name="" class="mdEditor" @keydown.9="tabFn" @scroll.passive="editScroll" v-model="input"></textarea>
             </div>
-            <div class="previewContainer markdown-body" v-scroll="previewScroll" v-html="compiledMarkdown" v-if="previewStatus">
+            <div class="previewContainer markdown-body" @scroll.passive="previewScroll" v-html="compiledMarkdown" v-if="previewStatus">
             </div>
         </div>
     </div>
