@@ -7,9 +7,12 @@
         <div class="note-lsit-content">
             <div class="note-list" v-for="(note, index) in notes" :key="index"
                 @mouseover="showDeleteBtn(index)"
-                @mouseleave="unShowDeleteBtn(index)">
-                <img src="../../public/note-blue.png" @click="showEditor(index)">
-                <p class="note-title" @click="showEditor(index)">{{ note.title }}</p>
+                @mouseleave="unShowDeleteBtn(index)"
+                :class="{active: seletedNote == index}">
+                <div class="click-aria" @click="showEditor(index)">
+                    <img src="../../public/note-blue.png">
+                    <p class="note-title" @click="showEditor(index)">{{ note.title }}</p>
+                </div>
                 <span v-show="!note.showBtn">·  {{ note.time }}</span>
                 <Button v-show="note.showBtn" type="error" class="delete" @click="deleteNote(index)">删除</Button>
             </div>
@@ -25,7 +28,7 @@ export default {
     name: 'sideBar',
     data() {
     return {
-
+        seletedNote: -1
     }
     },
     computed: {
@@ -34,12 +37,16 @@ export default {
     methods: {
         addNote: function() {
             let time = util.getNowTime()
-            store.state.notes.unshift({
+            this.$store.state.notes.unshift({
                 'title': '新建笔记',
                 'time': time,
                 'showBtn': false,
-                'content': 'hhhhhhhh'
+                'content': '## 开始你的书写吧！'
             })
+            this.$router.push({
+                path: `/home/editor/${0}`
+            })
+            this.seletedNote = 0
         },
         showDeleteBtn: function(index) {
             this.notes[index].showBtn = true;
@@ -51,9 +58,16 @@ export default {
             this.$router.push({
                 path: `/home/editor/${index}`
             })
+            this.seletedNote = index
         },
         deleteNote: function(index) {
-            store.state.notes.splice(index, 1)
+            if (index === this.seletedNote) {
+                this.seletedNote = 0
+                this.$router.push({
+                    path: `/home/editor/${0}`
+                })
+            }
+            this.$store.state.notes.splice(index, 1)
         }
     }
 }
@@ -102,7 +116,7 @@ export default {
     font-size: 14px;
     margin-top: -30px;
     margin-left: 60px;
-    width: 140px;
+    width: 70%;
     height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -114,7 +128,7 @@ export default {
     float: right;
     margin-right: 5px;
     position: relative;
-    top: -18px;
+    top: -35px;
     width: 95px;
 }
 
@@ -122,6 +136,15 @@ export default {
     float: right;
     position: relative;
     right: 30px;
-    top: -25px;
+    top: -45px;
+}
+
+.click-aria {
+    width: 65%;
+    height: 100%;
+}
+
+.active {
+    background-color: #dddddd;
 }
 </style>

@@ -17,7 +17,7 @@
     </div>
     <Poptip trigger="hover" content="content" class="hover" placement="bottom">
       <div slot="content">
-          <Button type="error" size="large" class="quit-btn">退出</Button>
+          <Button type="error" size="large" class="quit-btn" @click="loginOut">退出</Button>
       </div>
     </Poptip>
   </div>
@@ -29,6 +29,11 @@ export default {
   data() {
     return {
       userName: 'jack'
+    }
+  },
+  methods: {
+    loginOut() {
+      this.$router.push('/login')
     }
   }
 }

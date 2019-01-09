@@ -1,30 +1,19 @@
 <template>
     <div class="indexContainer">
-        <!-- <div class="btnsContainer">
-            <div class="btn" @click="getMdValueFn">获取mdValue</div>
-            <div class="btn" @click="getHtmlValueFn">获取htmlValue</div>
-        </div>
-        <div class="maskContainer" v-if="dilogStatus">
-            <div class="contentContainer">
-            <div class="closeBtnContainer" @click="closeMaskFn"></div>
-                <textarea class="showAreaContainer" v-model="msgShow" readonly></textarea>
-            </div>
-        </div> -->
-        <div class="side-bar">
-            <sideBar></sideBar>
-        </div>
         <div class="editor-title">
-            <input v-model="title" />
+            <input v-model="note.title" />
+            <Button type="primary" @click="saveNote">保存</Button>
         </div>
         <div class="editorContainer">
             <markdown 
-            :mdValuesP="msg.mdValue"  
+            :mdValuesP="note.content"  
             :fullPageStatusP="false" 
             :editStatusP="true" 
             :previewStatusP="true" 
             :navStatusP="true"
             :icoStatusP="true"  
             @childevent="childEventHandler"
+            :key="this.$route.params.id"
             ></markdown>
         </div>
     </div>
@@ -32,7 +21,6 @@
 
 <script>
 import markdown from './markdown'
-import sideBar from './sideBar'
 
 export default {
     name: 'index',
@@ -46,27 +34,34 @@ export default {
             title: '我要显示的内容'
         }
     },
+    computed: {
+        note: function() {
+            return this.$store.state.notes[this.$route.params.id]
+        }
+    },
     components: {
-        markdown,
-        sideBar
+        markdown
     },
     methods: {
-        childEventHandler:function(res){
+        childEventHandler: function(res){
             // res会传回一个data,包含属性mdValue和htmlValue，具体含义请自行翻译
             this.msg=res;
         },
-        getMdValueFn:function(){
+        getMdValueFn: function(){
             this.msgShow=this.msg.mdValue;
             this.dilogStatus=true;
         },
-        getHtmlValueFn:function(){
+        getHtmlValueFn: function(){
             this.msgShow=this.msg.htmlValue;
             this.dilogStatus=true;
             
         },
-        closeMaskFn:function(){
+        closeMaskFn: function(){
             this.msgShow='';
             this.dilogStatus=false;
+        },
+        saveNote: function() {
+            this.$Message.success('保存成功！');
         }
     }
 }
@@ -78,17 +73,11 @@ export default {
     height: 100%;
     background: #ddd;
     position: relative;
-
-    .side-bar {
-        float: left;
-        width: 20%;
-        height: 100%;
-    }
 }
 
 .editorContainer {
-    float: left;
-    width: 79.8%;
+    float: right;
+    width: 100%;
     height: 100%;
     margin-left: 2px;
     border: 1px solid #ddd;
@@ -96,10 +85,10 @@ export default {
 
 .editor-title {
     height: 50px;
-    width: 80%;
+    width: 100%;
     float: right;
     position: relative;
-    left: 3px;
+    left: 1px;
     background-color: #ffffff;
     text-align: left;
     font-size: 20px;
@@ -109,7 +98,7 @@ export default {
 
 .editor-title input {
     border: none;
-    width: 90%;
+    width: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -118,5 +107,10 @@ export default {
 .editor-title input:focus {
     border: none;
     outline: none;
+}
+
+.editor-title button {
+    margin-left: 8%;
+    border-radius: 2em;
 }
 </style>
